@@ -1,4 +1,2 @@
 # raspi_ansible
-Playbooks for my raspberry pi servers 
-
-
+Playbooks for my raspberry pi servers.

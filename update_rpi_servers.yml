@@ -1,0 +1,10 @@
+---
+- name: update sap servers
+  hosts: rpi
+  tasks:
+    - name: launch apt-get upgrade
+      apt:
+        name: '*'
+        update_cache: yes
+        autoclean: yes
+        state: latest

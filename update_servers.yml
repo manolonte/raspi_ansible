@@ -1,0 +1,6 @@
+---
+  - hosts: multi
+    become: yes
+
+    tasks:
+       - include_tasks: "update_{{ ansible_os_family }}.yml"

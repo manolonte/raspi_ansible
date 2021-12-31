@@ -1,0 +1,7 @@
+---
+ - name: launch apt-get upgrade
+   apt:
+        name: '*'
+        update_cache: yes
+        autoclean: yes
+        state: latest

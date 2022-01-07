@@ -1,0 +1,23 @@
+- hosts: localhost
+  gather_facts: no
+
+  vars_files:
+  - vars/secrets.yml
+
+  tasks:
+  - name: Reboot Access Points
+    ansible.netcommon.telnet:
+      host: 192.168.2.253
+      user: admin
+      password: "{{ ap_password }}"
+      login_prompt: 'Login: '
+      prompts:
+      - '[>#]'
+      command:
+      - exitandreboot
+    register: command_output
+
+  - name: Display output
+    debug:
+      msg: "{{ command_output.output }}"
+    

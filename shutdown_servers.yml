@@ -5,4 +5,5 @@
   tasks:
     - name: shutdown server
       community.general.shutdown:
+        msg: ""
         

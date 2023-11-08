@@ -1,6 +1,7 @@
 ---
 - name: shutdown servers
   hosts: all
+  gather_facts: false
   tasks:
     - name: shutdown server
       community.general.shutdown:

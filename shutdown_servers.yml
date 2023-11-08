@@ -1,0 +1,7 @@
+---
+- name: shutdown servers
+  hosts: all
+  tasks:
+    - name: shutdown server
+      community.general.shutdown:
+        

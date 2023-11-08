@@ -1,5 +1,5 @@
 ---
- - name: launch yum update
+ - name: launch zypper update
    community.general.zypper:
         name: '*'
         state: latest

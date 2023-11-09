@@ -1,6 +1,6 @@
 ---
-- name: update servers waking up and shutting down some servers
-  hosts: all
+- name: wake up sleeping servers
+  hosts: sleepers
   gather_facts: false
   become: true
   tasks:
@@ -9,15 +9,17 @@
         mac: "{{ mac }}"
       delegate_to: localhost
       become: false
-      when: inventory_hostname in groups['sleepers']
     
     - name: wait for sleeping servers to be up
       ansible.builtin.wait_for_connection:
-      when: inventory_hostname in groups['sleepers']
 
-    - name: update servers
-      ansible.builtin.import_playbook: update_servers.yml
+- name: update servers
+  ansible.builtin.import_playbook: update_servers.yml
 
+- name: shutdown sleepers
+  hosts: sleepers
+  become: true
+  tasks:
     - name: shutdown sleeping servers
       ansible.builtin.command: "/sbin/shutdown -h 1 --no-wall"
       failed_when: false

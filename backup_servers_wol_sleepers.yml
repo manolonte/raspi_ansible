@@ -1,0 +1,8 @@
+---
+- name: wake up sleeping servers
+  ansible.builtin.import_playbook: wol_sleepers.yml
+- name: backùp servers
+  ansible.builtin.import_playbook: backup_servers.yml
+- name: shutdown sleepers
+  ansible.builtin.import_playbook: shutdown_sleepers.yml
+       

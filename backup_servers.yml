@@ -1,0 +1,8 @@
+---
+- name: backup servers
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: backup server
+      ansible.builtin.command: "/usr/local/bin/backup_cuadro.sh"

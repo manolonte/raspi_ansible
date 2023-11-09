@@ -1,0 +1,8 @@
+---
+- name: renew certs
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: renew certs
+      ansible.builtin.command: "/usr/bin/certbot renew -n"

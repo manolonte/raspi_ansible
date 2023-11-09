@@ -7,4 +7,3 @@
   tasks:
     - name: shutdown me
       ansible.builtin.command: "init 0"
-      failed_when: false

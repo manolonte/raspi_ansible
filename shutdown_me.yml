@@ -6,5 +6,5 @@
   connection: local
   tasks:
     - name: shutdown me
-      ansible.builtin.command: "/sbin/shutdown -h 1 --no-wall"
+      ansible.builtin.command: "init 0"
       failed_when: false

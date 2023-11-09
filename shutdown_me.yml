@@ -1,0 +1,10 @@
+---
+- name: shutdown me
+  hosts: localhost
+  gather_facts: false
+  become: true
+  connection: local
+  tasks:
+    - name: shutdown me
+      ansible.builtin.command: "/sbin/shutdown -h 1 --no-wall"
+      failed_when: false

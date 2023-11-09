@@ -1,0 +1,8 @@
+---
+- name: restart dns servers
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: restart dns servers
+      ansible.builtin.command: "/usr/local/bin/pihole restartdns"

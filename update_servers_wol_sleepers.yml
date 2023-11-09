@@ -1,6 +1,8 @@
 ---
-- name: wake up sleeping servers, update and shutdown
+- name: wake up sleeping servers
   ansible.builtin.import_playbook: wol_sleepers.yml
+- name: update servers
   ansible.builtin.import_playbook: update_servers.yml
+- name: shutdown sleepers
   ansible.builtin.import_playbook: shutdown_sleepers.yml
        

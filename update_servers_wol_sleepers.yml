@@ -6,10 +6,10 @@
   tasks:
     - name: wake up servers 
       community.general.wakeonlan:
-#        mac: "00:1b:78:b6:8a:50"
-      mac: "{{ mac }}"
+        mac: "{{ mac }}"
       delegate_to: localhost
       when: inventory_hostname in groups['sleepers']
+    
     - name: wait for sleeping servers to be up
       ansible.builtin.wait_for_connection:
       when: inventory_hostname in groups['sleepers']

@@ -1,5 +1,5 @@
 ---
-  - hosts: multi
+  - hosts: all
     become: yes
 
     tasks:

@@ -16,7 +16,7 @@
       when: inventory_hostname in groups['sleepers']
 
     - name: shutdown sleeping servers
-      ansible.builtin.command: "/sbin/shutdown -h 0 --no-wall"
+      ansible.builtin.command: "/sbin/shutdown -h 1 --no-wall"
       failed_when: false
       when: inventory_hostname in groups['sleepers']
        

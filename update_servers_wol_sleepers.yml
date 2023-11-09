@@ -8,6 +8,7 @@
       community.general.wakeonlan:
         mac: "{{ mac }}"
       delegate_to: localhost
+      become: false
       when: inventory_hostname in groups['sleepers']
     
     - name: wait for sleeping servers to be up

@@ -1,27 +1,6 @@
 ---
-- name: wake up sleeping servers
-  hosts: sleepers
-  gather_facts: false
-  become: true
-  tasks:
-    - name: wake up servers 
-      community.general.wakeonlan:
-        mac: "{{ mac }}"
-      delegate_to: localhost
-      become: false
-    
-    - name: wait for sleeping servers to be up
-      ansible.builtin.wait_for_connection:
-
-- name: update servers
+- name: wake up sleeping servers, update and shutdown
+  ansible.builtin.import_playbook: wol_sleepers.yml
   ansible.builtin.import_playbook: update_servers.yml
-
-- name: shutdown sleepers
-  hosts: sleepers
-  become: true
-  tasks:
-    - name: shutdown sleeping servers
-      ansible.builtin.command: "/sbin/shutdown -h 1 --no-wall"
-      failed_when: false
-      when: inventory_hostname in groups['sleepers']
+  ansible.builtin.import_playbook: shutdown_sleepers.yml
        

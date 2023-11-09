@@ -1,0 +1,14 @@
+---
+- name: wake up sleeping servers
+  hosts: sleepers
+  gather_facts: false
+  become: true
+  tasks:
+    - name: wake up servers 
+      community.general.wakeonlan:
+        mac: "{{ mac }}"
+      delegate_to: localhost
+      become: false
+    
+    - name: wait for sleeping servers to be up
+      ansible.builtin.wait_for_connection:

@@ -5,4 +5,4 @@
   become: true
   tasks:
     - name: shutdown me
-      ansible.builtin.command: "init 0"
+      ansible.builtin.shell: "sleep 30 && init 0 &"

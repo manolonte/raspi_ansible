@@ -1,0 +1,13 @@
+---
+- name: mount backup hdd
+  hosts: cuadro
+  gather_facts: false
+  become: true
+  tasks:
+    - name: hdd on
+      ansible.builtin.shell: gpio write 4 0
+    - name: wait for device
+      ansible.builtin.wait_for:
+        path: /dev/disk/by-label/BACKUP
+    - name: mount /backup
+      ansible.builtin.shell: mount /backup

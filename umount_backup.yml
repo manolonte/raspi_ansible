@@ -1,0 +1,10 @@
+---
+- name: mount backup hdd
+  hosts: cuadro
+  gather_facts: false
+  become: true
+  tasks:
+    - name: umount /backup
+      ansible.builtin.shell: umount /backup
+    - name: hdd on
+      ansible.builtin.shell: gpio write 4 1

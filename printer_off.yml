@@ -1,0 +1,8 @@
+---
+- name: printer on
+  hosts: cuadro
+  gather_facts: false
+  become: true
+  tasks:
+    - name: printer on
+      ansible.builtin.shell: rmmod usblp && gpio write 5 1

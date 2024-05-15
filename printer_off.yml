@@ -6,3 +6,10 @@
   tasks:
     - name: printer on
       ansible.builtin.shell: rmmod usblp && gpio write 5 1
+    - name: set LD message
+      ansible.builtin.set_fact:
+        lcd_message: Printer off
+    - name: send LCD notification
+      ansible.builtin.import_tasks:
+        file: notify_lcd.yml
+

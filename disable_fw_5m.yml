@@ -6,3 +6,9 @@
   tasks:
     - name: disable firewall for 5 minutes
       ansible.builtin.command: "/usr/local/bin/pihole disable 5m"
+    - name: set LD message
+      ansible.builtin.set_fact:
+        lcd_message: FW disabled for 5 minutes
+    - name: send LCD notification
+      ansible.builtin.import_tasks:
+        file: notify_lcd.yml

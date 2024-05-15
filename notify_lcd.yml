@@ -1,0 +1,7 @@
+---
+- name: Notify LCD display
+  ansible.builtin.uri:
+    url: http://192.168.2.194:8080/lcdwrite
+    method: POST
+    body: "{{ lcd_message }}"
+  delegate_to: localhost

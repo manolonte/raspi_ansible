@@ -12,6 +12,9 @@
         file: notify_lcd.yml
     - name: backup server
       ansible.builtin.command: "/usr/local/bin/backup_cuadro.sh"
+    - name: Pause for 1 minutes to wait for messages to flush
+      ansible.builtin.pause:
+        minutes: 1
     - name: set LD message
       ansible.builtin.set_fact:
         lcd_message: Servers backup finished

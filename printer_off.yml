@@ -4,7 +4,7 @@
   gather_facts: false
   become: true
   tasks:
-    - name: printer on
+    - name: printer off
       ansible.builtin.shell: rmmod usblp && gpio write 5 1
     - name: set LD message
       ansible.builtin.set_fact:

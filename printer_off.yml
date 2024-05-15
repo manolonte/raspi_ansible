@@ -1,5 +1,5 @@
 ---
-- name: printer on
+- name: printer off
   hosts: cuadro
   gather_facts: false
   become: true

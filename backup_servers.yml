@@ -4,5 +4,18 @@
   gather_facts: false
   become: true
   tasks:
+    - name: set LD message
+      ansible.builtin.set_fact:
+        lcd_message: Servers backup started
+    - name: send LCD notification
+      ansible.builtin.import_tasks:
+        file: notify_lcd.yml
     - name: backup server
       ansible.builtin.command: "/usr/local/bin/backup_cuadro.sh"
+    - name: set LD message
+      ansible.builtin.set_fact:
+        lcd_message: Servers backup finished
+    - name: send LCD notification
+      ansible.builtin.import_tasks:
+        file: notify_lcd.yml
+

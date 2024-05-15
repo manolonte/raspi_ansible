@@ -3,4 +3,14 @@
   become: yes
 
   tasks:
+    - name: set LD message
+      ansible.builtin.set_fact:
+        lcd_message: "{{ inventory_hostname }} update started"
     - include_tasks: "update_{{ ansible_os_family }}.yml"
+    - name: set LD message
+      ansible.builtin.set_fact:
+        lcd_message: "{{ inventory_hostname }} update finished"
+    - name: send LCD notification
+      ansible.builtin.import_tasks:
+        file: notify_lcd.yml
+

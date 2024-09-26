@@ -5,3 +5,4 @@
     method: POST
     body: "{{ lcd_message }}"
   run_once: true
+  failed_when: false

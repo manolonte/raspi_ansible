@@ -14,9 +14,6 @@
     - name: backup server
       ansible.builtin.command: "/usr/local/bin/backup_cuadro.sh"
       failed_when: false
-    - name: Pause for messages to flush
-      ansible.builtin.pause:
-        seconds: 10
     - name: set LD message
       ansible.builtin.set_fact:
         lcd_message: "{{ inventory_hostname }} backup finished"

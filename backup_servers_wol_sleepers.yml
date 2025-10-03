@@ -1,8 +1,38 @@
 ---
 - name: wake up sleeping servers
-  ansible.builtin.import_playbook: wol_sleepers.yml
-- name: backùp servers
-  ansible.builtin.import_playbook: backup_servers.yml
-- name: shutdown sleepers
-  ansible.builtin.import_playbook: shutdown_sleepers.yml
-       
+  hosts: all
+  strategy: free
+  gather_facts: false
+  become: true
+  tasks:
+    - name: wake up servers
+      community.general.wakeonlan:
+        mac: "{{ mac }}"
+      delegate_to: localhost
+      become: false
+      when: inventory_hostname in groups['sleepers']
+
+    - name: wait for sleeping servers to be up
+      ansible.builtin.wait_for_connection:
+      when: inventory_hostname in groups['sleepers']
+
+    - name: set LD message
+      ansible.builtin.set_fact:
+        lcd_message: "{{ inventory_hostname }} backup started"
+    - name: send LCD notification
+      ansible.builtin.import_tasks:
+        file: notify_lcd.yml
+    - name: backup server
+      ansible.builtin.command: "/usr/local/bin/backup_cuadro.sh"
+      failed_when: false
+    - name: set LD message
+      ansible.builtin.set_fact:
+        lcd_message: "{{ inventory_hostname }} backup finished"
+    - name: send LCD notification
+      ansible.builtin.import_tasks:
+        file: notify_lcd.yml
+
+    - name: shutdown sleeping servers
+      ansible.builtin.command: "/sbin/shutdown -h 1 --no-wall"
+      failed_when: false
+      when: inventory_hostname in groups['sleepers']

@@ -1,12 +1,13 @@
 ---
 - name: backup servers
   hosts: all
+  strategy: free
   gather_facts: false
   become: true
   tasks:
     - name: set LD message
       ansible.builtin.set_fact:
-        lcd_message:  "{{ inventory_hostname }} backup started"
+        lcd_message: "{{ inventory_hostname }} backup started"
     - name: send LCD notification
       ansible.builtin.import_tasks:
         file: notify_lcd.yml
@@ -18,8 +19,7 @@
         seconds: 10
     - name: set LD message
       ansible.builtin.set_fact:
-        lcd_message:  "{{ inventory_hostname }} backup finished"
+        lcd_message: "{{ inventory_hostname }} backup finished"
     - name: send LCD notification
       ansible.builtin.import_tasks:
         file: notify_lcd.yml
-
